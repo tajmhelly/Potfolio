@@ -1,8 +1,19 @@
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { TechCanvas } from './Ball'
 import { skills } from '../constants'
 
 const Tech = () => {
+  const [isMobile, setIsMobile] = useState(() => window.innerWidth < 768)
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 767px)')
+    const handler = (e) => setIsMobile(e.matches)
+    mq.addEventListener('change', handler)
+    return () => mq.removeEventListener('change', handler)
+  }, [])
+
+  const visibleSkills = isMobile ? skills.slice(0, 6) : skills
+
   return (
     <section id="tech" style={{ background: '#050510', padding: '5rem 0' }}>
       <div className="container">
@@ -27,11 +38,11 @@ const Tech = () => {
         </motion.h2>
 
         {/* Single shared WebGL canvas for all balls */}
-        <TechCanvas skills={skills} />
+        <TechCanvas skills={visibleSkills} />
 
         {/* Name labels — col count mirrors Ball.jsx useCols() */}
         <div className="tech-labels">
-          {skills.map((skill, i) => (
+          {visibleSkills.map((skill, i) => (
             <motion.p
               key={skill.name}
               initial={{ opacity: 0, y: 16, filter: 'blur(6px)' }}
