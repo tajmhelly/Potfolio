@@ -53,7 +53,7 @@ export const SkillBall = ({ position, imgUrl }) => {
         >
           <icosahedronGeometry args={[1, 1]} />
           <meshStandardMaterial
-            color='#1a1a2e'
+            color='#0d2a5e'
             polygonOffset
             polygonOffsetFactor={-5}
             flatShading
@@ -72,51 +72,46 @@ export const SkillBall = ({ position, imgUrl }) => {
   )
 }
 
-function useCols() {
-  const getCols = () => {
-    const w = window.innerWidth
-    if (w < 768) return 3
-    if (w < 1025) return 4
-    return 6
-  }
-  const [cols, setCols] = useState(getCols)
+function useResponsive() {
+  const get = () => window.innerWidth < 768
+    ? { cols: 6, gap: 2.0, rowH: 130 }
+    : { cols: 6, gap: 3.2, rowH: 160 }
+  const [val, setVal] = useState(get)
   useEffect(() => {
-    const handler = () => setCols(getCols())
+    const handler = () => setVal(get())
     window.addEventListener('resize', handler)
     return () => window.removeEventListener('resize', handler)
   }, [])
-  return cols
+  return val
 }
 
-// All balls share ONE canvas — avoids WebGL context limit
-const BallGrid = ({ skills, cols }) => {
-  const GAP = 3.2
-
+const BallGrid = ({ skills, cols, gap }) => {
   return skills.map((skill, i) => {
     const col = i % cols
     const row = Math.floor(i / cols)
     const totalCols = Math.min(skills.length, cols)
-    const x = (col - (totalCols - 1) / 2) * GAP
-    const y = -(row - (Math.ceil(skills.length / cols) - 1) / 2) * GAP
+    const x = (col - (totalCols - 1) / 2) * gap
+    const y = -(row - (Math.ceil(skills.length / cols) - 1) / 2) * gap
     return <SkillBall key={skill.name} position={[x, y, 0]} imgUrl={skill.icon} />
   })
 }
 
 export const TechCanvas = ({ skills }) => {
-  const cols = useCols()
+  const { cols, gap, rowH } = useResponsive()
   const rows = Math.ceil(skills.length / cols)
-  const height = Math.max(240, rows * 160)
+  const height = Math.max(240, rows * rowH)
+  const camZ = rows > 1 ? (gap < 3 ? 12 : 14) : 9
 
   return (
     <div style={{ width: '100%', height }}>
       <Canvas
         frameloop='always'
         dpr={[1, 2]}
-        camera={{ position: [0, 0, rows > 1 ? 14 : 9], fov: 50 }}
+        camera={{ position: [0, 0, camZ], fov: 50 }}
         gl={{ preserveDrawingBuffer: true }}
       >
         <Suspense fallback={<CanvasLoader />}>
-          <BallGrid skills={skills} cols={cols} />
+          <BallGrid skills={skills} cols={cols} gap={gap} />
         </Suspense>
         <Preload all />
       </Canvas>

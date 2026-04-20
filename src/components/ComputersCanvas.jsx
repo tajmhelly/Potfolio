@@ -61,11 +61,13 @@ const ComputersCanvas = () => {
     return () => mq.removeEventListener('change', handler)
   }, [])
 
+  if (isMobile) return null
+
   return (
     <Canvas frameloop='always' shadows dpr={[1, 2]} camera={{ position: [20, 3, 5], fov: 25 }} gl={{ preserveDrawingBuffer: true }}>
       <Suspense fallback={<CanvasLoader />}>
-        <AutoResetControls isMobile={isMobile} />
-        <Computers isMobile={isMobile} />
+        <AutoResetControls isMobile={false} />
+        <Computers isMobile={false} />
       </Suspense>
       <Preload all />
     </Canvas>
