@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run *)",
+      "Bash(npm install *)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git push *)",
+      "Bash(node -e \"import\\('/home/tahj/projects/websiteshow/demosite/src/constants/index.js'\\).catch\\(\\(\\) => {}\\)\")",
+      "Bash(git rm *)"
+    ]
+  }
+}
