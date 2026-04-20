@@ -804,7 +804,7 @@ input:focus, textarea:focus, select:focus {
   }
 
   .hero-accent-line { display: none !important; }
-  .hero-canvas-wrapper { opacity: 0.35; pointer-events: none; }
+  .hero-canvas-wrapper { opacity: 1; pointer-events: none; }
 
   /* Earth / Contact: stack gradient from bottom so globe shows above form */
   .earth-gradient {
