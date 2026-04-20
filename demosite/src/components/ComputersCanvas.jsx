@@ -1,12 +1,28 @@
 import { Suspense, useEffect, useRef, useState } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { OrbitControls, Preload, useGLTF } from '@react-three/drei'
+import * as THREE from 'three'
 import CanvasLoader from './CanvasLoader'
 
 const Computers = ({ isMobile }) => {
   const computer = useGLTF('./desktop_pc/scene.gltf')
+  const groupRef = useRef()
+
+  useEffect(() => {
+    if (isMobile && groupRef.current) {
+      groupRef.current.rotation.y = Math.PI
+    }
+  }, [isMobile])
+
+  useFrame(() => {
+    if (!isMobile || !groupRef.current) return
+    groupRef.current.rotation.y = THREE.MathUtils.lerp(
+      groupRef.current.rotation.y, 0, 0.03
+    )
+  })
+
   return (
-    <mesh>
+    <group ref={groupRef}>
       <hemisphereLight intensity={2} groundColor='#ffffff' />
       <ambientLight intensity={2} />
       <spotLight position={[0, 20, 10]} angle={0.3} penumbra={0.5} intensity={4} castShadow shadow-mapSize={1024} />
@@ -18,7 +34,7 @@ const Computers = ({ isMobile }) => {
         position={isMobile ? [0, -2.8, -1.5] : [0, -3.25, -1.5]}
         rotation={isMobile ? [-0.01, -Math.PI / 2, 0] : [-0.01, -Math.PI / 2, -0.1]}
       />
-    </mesh>
+    </group>
   )
 }
 
