@@ -636,13 +636,26 @@ input:focus, textarea:focus, select:focus {
 .service-cards {
   display: flex;
   flex-wrap: wrap;
-  gap: 2rem;
-  margin-top: 4rem;
+  gap: 1.5rem;
+  margin-top: 3rem;
+  justify-content: center;
 }
 
 .service-card-wrap {
   width: 240px;
   flex-shrink: 0;
+}
+
+/* Earth / Contact section */
+.earth-gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, rgba(5,5,16,0.97) 0%, rgba(5,5,16,0.85) 42%, transparent 75%);
+  pointer-events: none;
+}
+
+.earth-form-wrap {
+  max-width: 480px;
 }
 
 /* Feedback cards (Testimonials section) */
@@ -716,13 +729,18 @@ input:focus, textarea:focus, select:focus {
   .tech-labels { grid-template-columns: repeat(4, 1fr); }
 
   .service-card-wrap {
-    width: calc(50% - 1rem);
+    width: calc(50% - 0.75rem);
     flex-shrink: 1;
   }
 
   .hero-text-wrapper { top: 100px; }
-
   .hero-accent-line { height: 240px !important; }
+
+  .earth-gradient {
+    background: linear-gradient(to right, rgba(5,5,16,0.97) 0%, rgba(5,5,16,0.9) 50%, transparent 82%);
+  }
+
+  .earth-form-wrap { max-width: 420px; }
 }
 
 /* ============================================
@@ -774,26 +792,39 @@ input:focus, textarea:focus, select:focus {
   /* Service cards: full width */
   .service-card-wrap {
     width: 100%;
+    max-width: 360px;
     flex-shrink: 1;
   }
 
-  /* Hero: push text up a bit, dim canvas */
+  /* Hero: push text up, dim canvas */
   .hero-text-wrapper {
     top: 72px;
     padding: 0 1rem;
     gap: 0.75rem;
   }
 
-  /* Hide the decorative vertical line on mobile */
   .hero-accent-line { display: none !important; }
+  .hero-canvas-wrapper { opacity: 0.35; pointer-events: none; }
 
-  /* Dim 3D canvas so text stays readable */
-  .hero-canvas-wrapper { opacity: 0.45; }
+  /* Earth / Contact: stack gradient from bottom so globe shows above form */
+  .earth-gradient {
+    background: linear-gradient(to top, rgba(5,5,16,0.98) 0%, rgba(5,5,16,0.92) 45%, rgba(5,5,16,0.3) 80%, transparent 100%);
+  }
+
+  .earth-form-wrap {
+    max-width: 100%;
+    padding-top: 55vw;
+  }
 
   /* Footer: stack vertically */
   .footer-inner {
     flex-direction: column;
     align-items: flex-start;
     gap: 0.75rem;
+  }
+
+  .footer-inner .flex {
+    flex-wrap: wrap;
+    gap: 0.75rem 1.25rem;
   }
 }

@@ -80,7 +80,7 @@ const About = () => {
           style={{ color: '#aaa6c3', fontSize: '1.05rem', maxWidth: '720px', lineHeight: 1.9 }}
         >
           I'm a skilled <span> Software Engineer</span> with experience in JavaScript, Python and C++
-          and expertise in frameworks like React, Django, Rest framework, QT and Three . I'm a quick learner
+          and expertise in frameworks like React, Django, Rest framework, QT, Pytorch and Three . I'm a quick learner
           and collaborate closely with clients to create efficient, scalable, and user-friendly
           solutions that solve real-world problems. Let's work together to bring your ideas to life!
         </motion.p>

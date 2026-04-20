@@ -204,21 +204,17 @@ export default function Earth() {
       {/* Earth canvas — full background */}
       <div ref={mountRef} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', cursor: 'grab' }} />
 
-      {/* Dark gradient fade on left so form is readable */}
-      <div style={{
-        position: 'absolute', inset: 0,
-        background: 'linear-gradient(to right, rgba(5,5,16,0.97) 0%, rgba(5,5,16,0.85) 42%, transparent 75%)',
-        pointerEvents: 'none',
-      }} />
+      {/* Dark gradient fade so form is readable */}
+      <div className="earth-gradient" />
 
       {/* Contact form overlay */}
       <div className="container" style={{ position: 'relative', zIndex: 2, padding: '5rem 1.5rem' }}>
         <motion.div
+          className="earth-form-wrap"
           initial={{ opacity: 0, x: -50 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
           viewport={{ once: true }}
-          style={{ maxWidth: 480 }}
         >
           <p style={{ color: '#aaa6c3', fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
             Get in touch

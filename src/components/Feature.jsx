@@ -51,7 +51,7 @@ const Feature = () => {
       <div className="container">
 
         <div ref={headRef} style={{ textAlign: 'center', marginBottom: '3rem' }}>
-          <h2 className={`shimmer-text ${headV}`} style={{ fontSize: '2rem', fontWeight: 700, marginBottom: '0.75rem' }}>
+          <h2 className={`shimmer-text ${headV}`} style={{ fontSize: 'clamp(1.4rem, 5vw, 2rem)', fontWeight: 700, marginBottom: '0.75rem' }}>
             Featured Projects
           </h2>
           <p className={`${headV} reveal-d2`} style={{ color: '#a0aec0', maxWidth: '480px', margin: '0 auto' }}>
