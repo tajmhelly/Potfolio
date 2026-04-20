@@ -1,5 +1,6 @@
+import { Suspense, lazy } from 'react'
 import { motion } from 'framer-motion'
-import ComputersCanvas from './ComputersCanvas'
+const ComputersCanvas = lazy(() => import('./ComputersCanvas'))
 
 const Hero = () => {
   return (
@@ -58,7 +59,9 @@ const Hero = () => {
 
       {/* 3D computer */}
       <div className="hero-canvas-wrapper">
-        <ComputersCanvas />
+        <Suspense fallback={null}>
+          <ComputersCanvas />
+        </Suspense>
       </div>
 
       {/* Scroll indicator */}
